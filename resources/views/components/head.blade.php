@@ -1,5 +1,5 @@
 <head>
-	<title>HollyWood Store</title>
+	<title>{{!empty($title) ? $title : 'Hollywood Store'}}</title>
 
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="{{url('css/m.min.css')}}">

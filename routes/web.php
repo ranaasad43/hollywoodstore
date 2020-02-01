@@ -12,4 +12,8 @@
 */
 
 Route::get('/','HomeController@gethome');
+// Route::get('/',function(){
+// 	echo "hello";
+// });
 Route::get('/register','RegistrationController@index');
+Route::post('/register','RegistrationController@adduser');
