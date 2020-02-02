@@ -1,20 +1,28 @@
 <div class="col m12">
 	<div class="heading">
-		<h5 class="z-depth-2">Registration</h5>	
+		<h5 class="z-depth-2">Registration</h5>
+    <p class="message-box {{!empty($message_class) ? $message_class : ''}}">
+      {{!empty($message) ? $message : ''}}
+    </p>
+    <ul>
+      @foreach($errors as $error)
+        <li class="red-text center-align">{{$error}}</li>
+      @endforeach
+    </ul>	
 	</div>
 	<div class="container form-container">
 		{!! Form::open(['url' => '/register' ,'method' => 'post', 'files' => true]) !!}
     <div class="input-field ">
         {{ Form::label('name:', null) }}
-        {{ Form::text('name', '') }}
+        {{ Form::text('name', request()->get('name')) }}
     </div>
     <div class="input-field ">
         {{ Form::label('user name:', null) }}
-        {{ Form::text('user_name', '') }}
+        {{ Form::text('user_name', request()->get('user_name')) }}
     </div>
     <div class="input-field ">
         {{ Form::label('email:', null) }}
-        {{ Form::email('email', '') }}
+        {{ Form::email('email', request()->get('email')) }}
     </div>
     <div class="input-field ">
         {{ Form::label('password:', null) }}

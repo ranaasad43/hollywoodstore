@@ -34,6 +34,11 @@ class RegistrationController extends ViewsComposingController
 
     	$validator = Validator::make($req->all(),$rules,$msgs);
 
+        if(!empty($validator->messages()->all())){
+            $this->viewData['errors'] = $validator->messages()->all();
+            return $this->buildTemplate('register');
+        }
+
     	if(!is_dir(public_path('/users'))){
     		mkdir(public_path('/users'));
     	}
@@ -66,10 +71,20 @@ class RegistrationController extends ViewsComposingController
 
         //dd($params);
         $response = $api->getApiData('POST','adduser',$params);
-
         dd($response);
+        $msgClass = ($response->status == 400) ? 'red-text' :'green-text';
+        //dd($msgClass);
+        $this->viewData['message'] = !empty($response->message) ? $response->message : '';
+        $this->viewData['message_class'] = $msgClass;
 
-    	dd($validator->messages()->all());
+        $this->viewData['errors'] = !empty($response->errors) ? $response->errors : [];
+        //dd($this->viewData);
+        return $this->buildTemplate('register');
+
+ 
+     //    dd($response);
+
+    	// dd($validator->messages()->all());
 
 //        dd($validator->messages()->all());
 

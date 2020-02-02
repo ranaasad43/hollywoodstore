@@ -48,7 +48,7 @@
 	text-align: center;
 }
 
-.heading h5{
+.heading h5 {
 	margin-top: 0;
 	font-size: 30px;
 	padding: 15px 0 15px 15px;
@@ -79,3 +79,19 @@ body{
 	padding: 3%;
 	border-radius: 10px;
 }
+
+.message-box {
+	background-color: #333;
+	padding: padding: 15px 0 15px 15px;
+	text-align: center;
+	font-size: 30px;
+	width: 50%;
+	margin: 0 auto;	 
+}
+
+
+
+
+
+
+

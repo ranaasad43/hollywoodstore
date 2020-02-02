@@ -4,8 +4,26 @@
 
 	class ApiCaller{
 
+		protected $apiKey;
+		protected $apiToken;
+
+		public function __construct(){
+			$this->apiKey = env('API_KEY');
+			$this->apiToken = env('API_TOKEN');
+		}
+
 		public function getApiData($method,$endpoint,$data=[],$debug=false){
 			//dd(env('API_URL').$endpoint);
+			//dd(env('API_DEBUG'));
+			$credential = [
+				'key' => $this->apiKey,
+				'token' => $this->apiToken
+			];				
+
+			$data = array_merge($credential,$data);
+
+			//dd($data);
+
 
 			$curl = curl_init();
 			switch($method){
@@ -25,7 +43,7 @@
 			curl_setopt_array($curl,$options);
 			$result = curl_exec($curl);
 			curl_close($curl);
-
+			//dd($result);
 			return json_decode($result);	
 		}
 	}  
