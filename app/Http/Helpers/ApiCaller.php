@@ -39,6 +39,23 @@
 					break;
 			}
 
+			switch ($method) {
+				case 'GET':
+					$endUrl = $endpoint . '?';
+					foreach($data as $key => $value){
+						$endUrl .= "$key=$value&";
+					}
+					//dd('get api');
+					$endPointUrl = rtrim($endUrl,'&');
+					//dd($endPointUrl);
+					$options = array(
+						CURLOPT_URL => env('API_URL').$endPointUrl,
+						CURLOPT_RETURNTRANSFER => !empty(env('API_DEBUG')) ? false : true 
+					);
+
+					break;
+			}
+
 			//dd($options);
 			curl_setopt_array($curl,$options);
 			$result = curl_exec($curl);

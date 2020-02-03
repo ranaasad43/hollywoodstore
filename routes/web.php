@@ -15,5 +15,12 @@ Route::get('/','HomeController@gethome');
 // Route::get('/',function(){
 // 	echo "hello";
 // });
-Route::get('/register','RegistrationController@index');
-Route::post('/register','RegistrationController@adduser');
+
+Route::middleware(['beforeLogin'])->group(function(){
+	Route::get('/register','RegistrationController@index');
+	Route::post('/register','RegistrationController@adduser');
+	Route::get('/login','RegistrationController@getLoginPage');
+	Route::post('/login','RegistrationController@userLogin');	
+});
+
+

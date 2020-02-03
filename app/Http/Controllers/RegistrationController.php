@@ -63,7 +63,7 @@ class RegistrationController extends ViewsComposingController
         $params['name'] = $req->get('name');
         $params['user_name'] = $req->get('user_name');
         $params['email'] = $req->get('email');
-        $params['password'] = $req->get('password');
+        $params['password'] = sha1($req->get('password'));
         $params['gender'] = $req->get('gender');
         $params['date_of_birth'] = $req->get('dob');
         $params['country'] = $req->get('country');
@@ -71,7 +71,7 @@ class RegistrationController extends ViewsComposingController
 
         //dd($params);
         $response = $api->getApiData('POST','adduser',$params);
-        dd($response);
+        //dd($response);
         $msgClass = ($response->status == 400) ? 'red-text' :'green-text';
         //dd($msgClass);
         $this->viewData['message'] = !empty($response->message) ? $response->message : '';
@@ -79,15 +79,49 @@ class RegistrationController extends ViewsComposingController
 
         $this->viewData['errors'] = !empty($response->errors) ? $response->errors : [];
         //dd($this->viewData);
-        return $this->buildTemplate('register');
+        if($response->status == 400){
+          return $this->buildTemplate('register');  
+        }else{
+          return redirect('/');
+        }    
 
- 
-     //    dd($response);
+    }
 
-    	// dd($validator->messages()->all());
+    public function getLoginPage(){
+      $this->viewData['title'] = 'Login Here';
+      return $this->buildTemplate('login');
+    }
 
-//        dd($validator->messages()->all());
+    public function userLogin(Request $req,ApiCaller $api){
+      //dd($req->all());
+      $rules = [
+        'email' =>'email',
+        'password' => 'required'
+      ];
 
-        
+      $message = [];
+
+      $validator = Validator::make($req->all(),$rules,$message);
+
+      if(!empty($validator->messages()->all())){
+        $this->viewData['errors'] = $validator->message()->all();
+        return $this->buildTemplate('login');
+      }
+
+      $params = array();
+
+      $params['email'] = $req->get('email');
+      $params['password'] = sha1($req->get('password'));
+
+      $response = $api->getApiData('GET','userLogin',$params);
+      //dd(serialize($response->data));
+      if(empty($response->data)){
+        $this->viewData['errors'] = 'User not Found .Try Again';
+        return $this->buildTemplate('login');
+      }
+
+      session(['userData' => serialize($response->data)]);
+      //dd(session()->get('userData'));
+      return redirect('/');
     }
 }

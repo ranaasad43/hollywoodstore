@@ -5,13 +5,14 @@
 			      <ul id="nav-mobile" class="left hide-on-med-and-down">			      	
 			        <li><a href="{{url('/')}}">Home</a></li>
 			        <li><a href="#">Movies</a></li>
-			        <li><a href="{{url('/register')}}">Reginster</a></li>
-			      </ul>
+			      @if(empty(session()->get('userData')))  
 			      <ul id="nav-mobile" class="right hide-on-med-and-down">
 			      	<li><a href="{{url('/register')}}" class="btn">Register</a></li>
-			        <li><a href="collapsible.html" class="btn">Login</a></li>
+			        <li><a href="{{url('/login')}}" class="btn">Login</a></li>
 			      </ul>
+			      @endif
 			    </div>
+
   			</nav>
 			</div>
 		</div>
