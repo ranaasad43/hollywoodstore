@@ -23,4 +23,11 @@ Route::middleware(['beforeLogin'])->group(function(){
 	Route::post('/login','RegistrationController@userLogin');	
 });
 
+Route::get('/delSession',function(){
+	if(!empty(session()->get('userData'))){
+		session()->flush();
+	}
+
+	return redirect()->back();
+})->name('delsession');
 
