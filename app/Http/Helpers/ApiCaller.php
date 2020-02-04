@@ -23,7 +23,7 @@
 			$data = array_merge($credential,$data);
 
 			//dd($data);
-
+			//dd(env('API_URL').$endpoint);
 
 			$curl = curl_init();
 			switch($method){

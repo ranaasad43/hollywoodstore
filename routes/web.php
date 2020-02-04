@@ -23,6 +23,9 @@ Route::middleware(['beforeLogin'])->group(function(){
 	Route::post('/login','RegistrationController@userLogin');	
 });
 
+Route::get('/addfilm','FilmsController@addPage');
+Route::post('/addfilm','FilmsController@store');
+
 Route::get('/delSession',function(){
 	if(!empty(session()->get('userData'))){
 		session()->flush();
