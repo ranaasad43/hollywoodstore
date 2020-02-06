@@ -20,7 +20,7 @@ class ViewsComposingController extends Controller
                 
     			$this->viewData[$section.'s'] = $page[$section];
     		}
-
+            //dd($this->viewData);
     		return view($page['layout'],$this->viewData);
     	}else{
     		dd('page not found');

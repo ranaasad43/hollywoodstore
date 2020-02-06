@@ -82,7 +82,7 @@ class RegistrationController extends ViewsComposingController
         if($response->status == 400){
           return $this->buildTemplate('register');  
         }else{
-          return redirect('/');
+          return redirect('/',$this->viewData);
         }    
 
     }
@@ -123,5 +123,13 @@ class RegistrationController extends ViewsComposingController
       session(['userData' => serialize($response->data)]);
       //dd(session()->get('userData'));
       return redirect('/');
+    }
+
+    public function logout(){
+      if(!empty(session()->get('userData'))){
+        session()->flush();
+        }
+
+      return redirect()->back();
     }
 }

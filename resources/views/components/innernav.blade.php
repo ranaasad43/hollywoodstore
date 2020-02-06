@@ -8,6 +8,7 @@
 			  </ul>       
 			  @if(empty(session()->get('userData')))			       
 				  <ul id="nav-mobile" class="right hide-on-med-and-down">
+				  	<li><a href="{{route('addfilm')}}" class="btn">Add Film</a></li>
 				   	<li><a href="{{url('/register')}}" class="btn">Register</a></li>
 				    <li><a href="{{url('/login')}}" class="btn">Login</a></li>
 				  </ul>

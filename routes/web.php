@@ -23,14 +23,8 @@ Route::middleware(['beforeLogin'])->group(function(){
 	Route::post('/login','RegistrationController@userLogin');	
 });
 
-Route::get('/addfilm','FilmsController@addPage');
+Route::get('/addfilm','FilmsController@addPage')->name('addfilm');
 Route::post('/addfilm','FilmsController@store');
 
-Route::get('/delSession',function(){
-	if(!empty(session()->get('userData'))){
-		session()->flush();
-	}
-
-	return redirect()->back();
-})->name('delsession');
+Route::get('/delSession','RegistrationController@logout')->name('delsession');
 

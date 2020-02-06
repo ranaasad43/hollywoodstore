@@ -68,7 +68,7 @@ class FilmsController extends ViewsComposingController
 
         //dd($params);
         $response = $api->getApiData('POST','addfilm',$params);
-        dd($response);
+        //dd($response);
         $msgClass = ($response->status == 400) ? 'red-text' :'green-text';
         //dd($msgClass);
         $this->viewData['message'] = !empty($response->message) ? $response->message : '';
@@ -77,9 +77,11 @@ class FilmsController extends ViewsComposingController
         $this->viewData['errors'] = !empty($response->errors) ? $response->errors : [];
         //dd($this->viewData);
         if($response->status == 400){
-          return $this->buildTemplate('register');  
+          return $this->buildTemplate('addfilm');  
         }else{
-          return redirect('/');
+            $data = $this->viewData;
+            //dd($data);
+          return $this->buildTemplate('home');
         }
     }
 }
