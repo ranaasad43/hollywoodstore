@@ -9,6 +9,8 @@
 .feature-movies li{
 	background: #ddd;
 	width: 	30%;
+	margin-top: 2%;
+	height: 450px;
 	padding: 10px;
 	border-radius: 10px;
 	float: left;
@@ -23,7 +25,8 @@
 }
 
 .movie-title{
-	font-size: 25px;
+	font-size: 15px;
+	height: 70px;
 	font-weight: bold;
 	text-align: center;
 	background:#bdbdbd;

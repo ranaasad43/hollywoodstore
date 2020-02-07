@@ -15,6 +15,7 @@
 		public function getApiData($method,$endpoint,$data=[],$debug=false){
 			//dd(env('API_URL').$endpoint);
 			//dd(env('API_DEBUG'));
+			//dd($data);
 			$credential = [
 				'key' => $this->apiKey,
 				'token' => $this->apiToken
@@ -41,6 +42,7 @@
 
 			switch ($method) {
 				case 'GET':
+					//dd($endpoint);
 					$endUrl = $endpoint . '?';
 					foreach($data as $key => $value){
 						$endUrl .= "$key=$value&";
