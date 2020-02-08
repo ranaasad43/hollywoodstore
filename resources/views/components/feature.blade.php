@@ -11,7 +11,7 @@
 					<div class="movie-title">{{$film->title}}</div>
 					<div class="movie-year">{{$film->year}}</div>
 					<div class="movie-price">20$</div>
-					<a href="#" class="btn">Buy</a>
+					<a href="{{url('/addToCart/'.$film->id)}}" id="add_to_cart" class="btn" data-product="{{$film->id}}">Add To Cart</a>
 				</li>
 			@endforeach
 		@endif				

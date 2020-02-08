@@ -22,6 +22,6 @@
       </div>
     </div>
   </footer>
-<script type="text/javascript" src="{{url('js/jquery.js')}}"></script>
-<script type="text/javascript" src="{{url('js/m.min.js')}}"></script>
-<script type="text/javascript" src="{{url('js/script.js')}}"></script>
+  @foreach($footerJsLinks as $link)
+    <script type="text/javascript" src="{{$link}}"></script>
+  @endforeach
