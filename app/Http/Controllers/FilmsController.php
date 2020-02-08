@@ -84,4 +84,13 @@ class FilmsController extends ViewsComposingController
           return $this->buildTemplate('home');
         }
     }
+
+    public function getFilm(Request $req, ApiCaller $api){
+        //dd($req->all());
+        $params = [];
+        $params['search'] = $req->get('search');
+        $results = $api->getApiData('GET','films',$params);
+        //dd($results->data);
+        return json_encode($results);
+    }
 }
