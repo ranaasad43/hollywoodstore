@@ -15,7 +15,7 @@ class RegistrationController extends ViewsComposingController
     }
 
     public function adduser(Request $req,ApiCaller $api){
-    	//dd($req->all());
+    	
     	$rules = [
     		// 'name' =>'min:3',
     		// 'user_name' => 'min:5',

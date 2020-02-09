@@ -28,5 +28,6 @@ Route::post('/addfilm','FilmsController@store');
 
 Route::get('/delSession','RegistrationController@logout')->name('delsession');
 Route::get('/addToCart/{id}','CartController@addToCart');
+Route::get('/admin-panel','AdminController@getadmin');
 Route::post('/films', 'FilmsController@getFilm');
 

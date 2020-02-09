@@ -1,17 +1,17 @@
-<div class="col m12">
+<div class="col m9">
 	<div class="heading">
 		<h5 class="z-depth-2">Add Film</h5>
     <p class="message-box {{!empty($message_class) ? $message_class : ''}}">
       {{!empty($message) ? $message : ''}}
     </p>
     <ul>
-      @foreach($errors as $error)
+       @foreach($errors as $error)
         <li class="red-text center-align">{{$error}}</li>
       @endforeach
     </ul>	
 	</div>
 	<div class="container form-container">
-		 <form class="col s12" method="post" action="{{url('/addfilm')}}">
+		 <form class="col s12" method="post" action="{{url('/addfilm')}}" enctype="multipart/form-data">
       @csrf
       <div class="row">
         <div class="input-field ">
@@ -61,8 +61,17 @@
             <label for="plot">Plot :</label>
           </div>
         </div>
+      </div>      
+      <div class="file-field input-field">
+      <div class="btn">
+        <span>Poster</span>
+        <input type="file" name="poster">
       </div>
-      <div class="row">
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text">
+      </div>
+    </div>
+    <div class="row">
         <div class="col s12">          
           <div class="input-field col s12">
             <button type="submit" class="btn-large">Add</button>
@@ -74,6 +83,5 @@
      
     	
 	</div>
-	
-	
+ 	
 </div>

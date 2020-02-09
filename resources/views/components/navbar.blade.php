@@ -7,11 +7,15 @@
         {{!empty($userData) ? $userData->name : 'Guest'}}         
       </span>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li>
-          <a href="#" title="shopping cart">Cart Items:{{$quantity}}/Total:{{$total}}$</a>
-        </li>
+        @if(!empty(session()->get('userData')))
+          <li>
+            <a href="#" title="shopping cart">Cart Items:{{$quantity}}/Total:{{$total}}$</a>
+          </li>
+        @endif
         <li><a href="#">Help</a></li>
+        <li><a href="{{url('/admin-panel')}}" class="btn">Admin</a></li>
       </ul>
     </div>
   </nav>  
 </div>
+<div class="container   main">

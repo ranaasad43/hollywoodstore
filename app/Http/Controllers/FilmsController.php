@@ -15,7 +15,11 @@ class FilmsController extends ViewsComposingController
     }
 
     public function store(Request $req,ApiCaller $api){
-    	//dd($req->all());
+    	//dd($req->file('poster')->getClientOriginalName());
+        //dd($req->poster->getClientMimeType());
+        //dd($req->poster->path());
+        //dd($_FILES['poster']['type']);
+        //dd($req->file('poster'))->mimeType();
     	$rules = [
     		// 'name' =>'min:3',
     		// 'user_name' => 'min:5',
@@ -39,24 +43,11 @@ class FilmsController extends ViewsComposingController
             return $this->buildTemplate('addfilm');
         }
 
-    	// if(!is_dir(public_path('/users'))){
-    	// 	mkdir(public_path('/users'));
-    	// }
-
-    	// if(!is_dir(public_path('/users/'.$req->get('user_name')))){
-    	// 	mkdir(public_path('/users/'.$req->get('user_name')));
-    	// }   	
-
-    	// $image = Image::make($req->file('image'));
-    	// $wm = Image::make(public_path('/images/film.png'))->resize(50,50);
-
-    	// $image->insert($wm, 'bottom-left');
-
-    	// $directory = public_path('/users/'.$req->get('user_name'));
-
-    	// $image_name = $req->get('user_name').'.'.$req->file('image')->getClientOriginalExtension();
-
-    	// $image->save($directory.'/'.$image_name);
+         $file = $req->poster->path();
+         $filename = $req->file('poster')->getClientOriginalName();
+         $fileMime = $req->poster->getClientMimeType();
+         //dd($fileMime);
+        // dd($file);
 
         $params = array();
 
@@ -65,6 +56,9 @@ class FilmsController extends ViewsComposingController
         $params['genre'] = $req->get('genre');
         $params['studio'] = $req->get('studio');
         $params['plot'] = $req->get('plot');
+        $params['file'] = $file;
+        $params['filename'] = $filename;
+        $params['filetype'] = $fileMime;
 
         //dd($params);
         $response = $api->getApiData('POST','addfilm',$params);
