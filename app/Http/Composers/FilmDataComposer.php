@@ -27,4 +27,5 @@ use App\Http\Helpers\ApiCaller;
 			//dd($result->data);
 			$view->with('films',!empty($result->data) ? $result->data : []);
 		}
+
 	}

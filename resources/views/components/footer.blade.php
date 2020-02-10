@@ -23,5 +23,5 @@
     </div>
   </footer>
   @foreach($footerJsLinks as $link)
-    <script type="text/javascript" src="{{$link}}"></script>
+    <script type="text/javascript" src="{{url('/'.$link)}}"></script>
   @endforeach

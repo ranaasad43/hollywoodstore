@@ -79,12 +79,42 @@ class FilmsController extends ViewsComposingController
         }
     }
 
-    public function getFilm(Request $req, ApiCaller $api){
+    public function getFilms(Request $req, ApiCaller $api){
         //dd($req->all());
         $params = [];
         $params['search'] = $req->get('search');
         $results = $api->getApiData('GET','films',$params);
         //dd($results->data);
         return json_encode($results);
+    }
+
+    public function getFilm($id,ApiCaller $api){
+        
+        $results = $api->getApiData('GET','film/'.$id,[]);
+        //dd($results);
+        $this->viewData['status'] = !empty($results->status) ? $results->status : '';
+        $this->viewData['film'] = !empty($results->data) ? $results->data : '';
+        //dd($this->viewData);
+        return $this->buildTemplate('film');
+    }
+
+    public function getStudios($id,ApiCaller $api){
+        
+        $results = $api->getApiData('GET','getstudios/'.$id,[]);
+        //dd($results);
+        $this->viewData['status'] = !empty($results->status) ? $results->status : '';
+        $this->viewData['films'] = !empty($results->data) ? $results->data : '';
+        //dd($this->viewData);
+        return $this->buildTemplate('studio');
+    }
+
+    public function showFilms(ApiCaller $api){
+        //dd('showfilms');
+        $results = $api->getApiData('GET','showfilms',[]);
+        //dd($results);
+        $this->viewData['status'] = !empty($results->status) ? $results->status : '';
+        $this->viewData['films'] = !empty($results->data) ? $results->data : '';
+        //dd($this->viewData);
+        return $this->buildTemplate('films');
     }
 }

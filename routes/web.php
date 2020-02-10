@@ -29,5 +29,9 @@ Route::post('/addfilm','FilmsController@store');
 Route::get('/delSession','RegistrationController@logout')->name('delsession');
 Route::get('/addToCart/{id}','CartController@addToCart');
 Route::get('/admin-panel','AdminController@getadmin');
-Route::post('/films', 'FilmsController@getFilm');
+Route::post('/films', 'FilmsController@getFilms');
+Route::get('/film/{id}', 'FilmsController@getFilm');
+Route::get('/genre/{id}','GenreController@getGenre');
+Route::get('/studio/{id}','FilmsController@getStudios');
+Route::get('/films','FilmsController@showFilms');
 

@@ -6,16 +6,16 @@
 				  
 				</div>
 				<div class="carousel-item red white-text" href="#one!">
-				  <img class="slider-img" src="images/jl.jpg" alt="movie">
+				  <img class="slider-img" src="{{url('/images/jl.jpg')}}" alt="movie">
 				</div>
 				<div class="carousel-item amber white-text" href="#two!">
-				  <img class="slider-img" src="images/avengers.png" alt="movie">
+				  <img class="slider-img" src="{{url('/images/avengers.png')}}" alt="movie">
 				</div>
 				<div class="carousel-item green white-text" href="#three!">
-				  <img class="slider-img" src="images/darknight.jpg" alt="movie">
+				  <img class="slider-img" src="{{url('/images/darknight.jpg')}}" alt="movie">
 				</div>
 				<div class="carousel-item blue white-text" href="#four!">
-				  <img class="slider-img" src="images/slide2.jpg" alt="movie">
+				  <img class="slider-img" src="{{url('/images/slide2.jpg')}}" alt="movie">
 				</div>
 			</div>
 			</div>

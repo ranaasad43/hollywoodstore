@@ -75,7 +75,7 @@
 			curl_setopt_array($curl,$options);
 			$result = curl_exec($curl);
 			curl_close($curl);
-			dd($result);
+			//dd($result);
 			return json_decode($result);	
 		}
 	}  
