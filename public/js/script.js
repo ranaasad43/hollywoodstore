@@ -21,7 +21,7 @@ $('#submit_search').click(function(){
 					var html = "";
 					$.each(result.data,function(key,value){
 						html += "<li class='z-depth-3'>";
-							html += "<img src='images/thor.jpg' alt='movie'>";
+							html += "<img src='{{url('/posters/'.$film->title.'/'.$film->poster)}}' alt='movie'>";
 							html += "<div class='movie-title'>"+value.title+"</div>";
 							html += "<div class='movie-year'>"+value.year+"</div>";
 							html += "<div class='movie-price'>"+"20$"+"</div>";

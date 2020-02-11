@@ -38,7 +38,7 @@
             <option value="6">Mystery</option>
           </select>          
         </div>
-      </div>
+      </div>      
       <div class="row">
         <div >
           <label>Studio :</label>
@@ -60,6 +60,16 @@
             <textarea name="plot" class="materialize-textarea"></textarea>
             <label for="plot">Plot :</label>
           </div>
+        </div>
+      </div>
+      <div class="row">
+        <div >
+          <label>Featured:</label>
+          <select class="browser-default" name="feature">
+            <option value="" disabled selected>feature</option>
+            <option value="0">No</option>
+            <option value="1">Yes</option>            
+          </select>          
         </div>
       </div>      
       <div class="file-field input-field">

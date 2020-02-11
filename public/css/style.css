@@ -10,7 +10,7 @@
 	background: #ddd;
 	width: 	30%;
 	margin-top: 2%;
-	height: 500px;
+	height: 550px;
 	padding: 10px;
 	border-radius: 10px;
 	float: left;
@@ -20,7 +20,7 @@
 .feature-movies li img{
 	width: 100%;
 }
-.feature-movies li a{
+.feature-movies li a,.feature-movies li button{
 	width: 100%;
 	margin-top: 4%;
 }

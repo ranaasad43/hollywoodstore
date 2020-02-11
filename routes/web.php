@@ -31,6 +31,7 @@ Route::get('/addToCart/{id}','CartController@addToCart');
 Route::get('/admin-panel','AdminController@getadmin');
 Route::post('/films', 'FilmsController@getFilms');
 Route::get('/film/{id}', 'FilmsController@getFilm');
+Route::delete('/deletefilm/{id}', 'FilmsController@destroy')->name('delfilm');
 Route::get('/genre/{id}','GenreController@getGenre');
 Route::get('/studio/{id}','FilmsController@getStudios');
 Route::get('/films','FilmsController@showFilms');

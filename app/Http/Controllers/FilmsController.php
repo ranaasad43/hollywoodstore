@@ -15,6 +15,7 @@ class FilmsController extends ViewsComposingController
     }
 
     public function store(Request $req,ApiCaller $api){
+    	//dd($req->all());
     	//dd($req->file('poster')->getClientOriginalName());
         //dd($req->poster->getClientMimeType());
         //dd($req->poster->path());
@@ -43,11 +44,19 @@ class FilmsController extends ViewsComposingController
             return $this->buildTemplate('addfilm');
         }
 
-         $file = $req->poster->path();
-         $filename = $req->file('poster')->getClientOriginalName();
-         $fileMime = $req->poster->getClientMimeType();
-         //dd($fileMime);
-        // dd($file);
+         //$file = $req->poster->path();
+         
+         //$fileMime = $req->poster->getClientMimeType();
+         if(!is_dir(public_path('/posters'))){
+    				mkdir(public_path('/posters'));
+    			}
+    			if(!is_dir(public_path('/posters/'.$req->get('title')))){
+    				mkdir(public_path('/posters/'.$req->get('title')));
+    			}  			
+    			$postername = $req->year.$req->genre.$req->studio.".".$req->file('poster')->getClientOriginalExtension();
+    			$directory = public_path('/posters/'.$req->get('title'));
+    			$poster = $req->file('poster');
+         	
 
         $params = array();
 
@@ -56,12 +65,17 @@ class FilmsController extends ViewsComposingController
         $params['genre'] = $req->get('genre');
         $params['studio'] = $req->get('studio');
         $params['plot'] = $req->get('plot');
-        $params['file'] = $file;
-        $params['filename'] = $filename;
-        $params['filetype'] = $fileMime;
+        $params['poster'] = $postername;
+        // $params['file'] = $file;
+        // $params['filename'] = $filename;
+        // $params['filetype'] = $fileMime;
 
         //dd($params);
         $response = $api->getApiData('POST','addfilm',$params);
+        //dd($response);
+        if($response->status == 200){        	
+    			$poster->move($directory,$postername);    			
+        };
         //dd($response);
         $msgClass = ($response->status == 400) ? 'red-text' :'green-text';
         //dd($msgClass);
@@ -116,5 +130,11 @@ class FilmsController extends ViewsComposingController
         $this->viewData['films'] = !empty($results->data) ? $results->data : '';
         //dd($this->viewData);
         return $this->buildTemplate('films');
+    }
+
+    public function destroy($id,ApiCaller $api){
+        $results = $api->getApiData('DELETE','delfilm/'.$id,[]);
+        //dd($results);
+        return redirect()->back();    
     }
 }
