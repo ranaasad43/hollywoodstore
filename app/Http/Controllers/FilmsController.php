@@ -162,6 +162,6 @@ class FilmsController extends ViewsComposingController
       $this->viewData['status'] = !empty($results->status) ? $results->status : '';
       $this->viewData['message'] = !empty($results->message) ? $results->message : '';
 
-        return redirect('/admin-panel');
+        return redirect('/adminpage');
     }
 }

@@ -17,13 +17,12 @@ $('#submit_search').click(function(){
 		success: function(res){
 			//console.log(res);
 			result = JSON.parse(res);
-			//console.log(result.data);
 			if(typeof result.status != 'undefined' && result.status == 200){
 				if(result.data.length > 0){
 					var html = "";
 					$.each(result.data,function(key,value){
 						html += "<li class='z-depth-3'>";
-							html += "<img src='{{url('/posters/'.$film->title.'/'.$film->poster)}}' alt='movie'>";
+							html += "<img src='"+base_url+"/posters/"+value.title+'/'+value.poster+' '+"' >";
 							html += "<div class='movie-title'>"+value.title+"</div>";
 							html += "<div class='movie-year'>"+value.year+"</div>";
 							html += "<div class='movie-price'>"+"20$"+"</div>";

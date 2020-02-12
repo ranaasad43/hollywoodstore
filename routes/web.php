@@ -36,7 +36,7 @@ Route::middleware(['admin'])->group(function(){
 Route::get('/delSession','RegistrationController@logout')->name('delsession');
 Route::get('/addToCart/{id}','CartController@addToCart');
 Route::get('/admin-panel','AdminController@adminlogin');
-
+Route::post('/films', 'FilmsController@getFilms');
 Route::get('/film/{id}', 'FilmsController@getFilm');
 
 Route::get('/genre/{id}','GenreController@getGenre');
