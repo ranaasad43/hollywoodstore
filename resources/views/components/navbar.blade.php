@@ -1,3 +1,4 @@
+
 <div class="navbar-fixed ">
   <nav class="black nav-div">
     <div class="nav-wrapper container ">
@@ -13,7 +14,7 @@
           </li>
         @endif
         <li><a href="#">Help</a></li>
-        <li><a href="{{url('/admin-panel')}}" class="btn">Admin</a></li>
+        
       </ul>
     </div>
   </nav>  

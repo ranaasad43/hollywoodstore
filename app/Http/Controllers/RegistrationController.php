@@ -126,7 +126,7 @@ class RegistrationController extends ViewsComposingController
     }
 
     public function logout(){
-      if(!empty(session()->get('userData'))){
+      if(!empty(session()->get('userData')) || !empty(session()->get('admin'))){
         session()->flush();
         }
 

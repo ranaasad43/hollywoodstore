@@ -7,7 +7,9 @@ $('.carousel.carousel-slider').carousel({
 $('#submit_search').click(function(){
 	var data = {};
 	data.search = $('#search_value').val();
-	//console.log(base_url+'/films');
+	// data.KEY = '2e3b4e5bc05c0b678ec769adc918409b';
+	// data.TOKEN = '$2y$10$1iX2L8xcVPoleQ1XTCO1F.S4d8eVyviuRt0fIpeMLMDJ6tF3x5ASq';
+	console.log(data);
 	$.ajax({
 		type: "POST",
 		url:base_url+'/films',

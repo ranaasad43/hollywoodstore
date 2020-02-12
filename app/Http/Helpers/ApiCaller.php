@@ -14,14 +14,14 @@
 
 		public function getApiData($method,$endpoint,$data=[],$debug=false){
 			//dd(env('API_URL').$endpoint);
-			//dd(env('API_DEBUG'));
-			//dd($data);
-			// $credential = [
-			// 	'key' => $this->apiKey,
-			// 	'token' => $this->apiToken
-			// ];				
+			// dd(env('API_DEBUG'));
+			// dd($data);
+			$credential = [
+				'key' => $this->apiKey,
+				'token' => $this->apiToken
+			];				
 
-			// $data = array_merge($credential,$data);
+			$data = array_merge($credential,$data);
 
 			//dd($data);
 			//dd(env('API_URL').$endpoint);
@@ -90,6 +90,30 @@
         );
          break;
        }
+       switch ($method) {
+				case 'PUT':
+		    $options = array(
+	          CURLOPT_URL => env('API_URL') . $endpoint,
+	          CURLOPT_CUSTOMREQUEST => 'PUT',
+	          CURLOPT_POSTFIELDS => $data,
+	          CURLOPT_RETURNTRANSFER => !empty(env('API_DEBUG')) ? false : true
+	        );
+	         break;
+	       }
+	  //     switch($method){
+			// 	case 'PT':
+
+			// 		$options = array(
+			// 			CURLOPT_URL => env('API_URL').$endpoint,
+			// 			//CURLOPT_POST => true,
+			// 			CURLOPT_CUSTOMREQUEST => 'PUT', 
+			// 			CURLOPT_POSTFIELDS => $data,
+			// 			CURLOPT_RETURNTRANSFER => !empty(env('API_DEBUG')) ?	false:true
+
+			// 		);
+			// 		break;
+			// }
+
 			//dd($options);
 			curl_setopt_array($curl,$options);
 			$result = curl_exec($curl);

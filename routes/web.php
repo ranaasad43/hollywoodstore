@@ -22,17 +22,27 @@ Route::middleware(['beforeLogin'])->group(function(){
 	Route::get('/login','RegistrationController@getLoginPage');
 	Route::post('/login','RegistrationController@userLogin');	
 });
-
-Route::get('/addfilm','FilmsController@addPage')->name('addfilm');
-Route::post('/addfilm','FilmsController@store');
+Route::middleware(['admin'])->group(function(){
+	Route::get('/addfilm','FilmsController@addPage')->name('addfilm');
+	Route::post('/addfilm','FilmsController@store');
+	Route::post('/films', 'FilmsController@getFilms');
+	Route::delete('/deletefilm/{id}', 'FilmsController@destroy')->name('delfilm');
+	Route::get('/editfilm/{id}','FilmsController@edit');
+	Route::put('/updatefilm/{id}','FilmsController@update');
+	Route::get('/adminpage','AdminController@adminpage');	
+});
+//Route::get('/adminpage','AdminController@adminpage')->middleware('admincheck');;
 
 Route::get('/delSession','RegistrationController@logout')->name('delsession');
 Route::get('/addToCart/{id}','CartController@addToCart');
-Route::get('/admin-panel','AdminController@getadmin');
-Route::post('/films', 'FilmsController@getFilms');
+Route::get('/admin-panel','AdminController@adminlogin');
+
 Route::get('/film/{id}', 'FilmsController@getFilm');
-Route::delete('/deletefilm/{id}', 'FilmsController@destroy')->name('delfilm');
+
 Route::get('/genre/{id}','GenreController@getGenre');
 Route::get('/studio/{id}','FilmsController@getStudios');
+
 Route::get('/films','FilmsController@showFilms');
+
+Route::post('/getadmin','AdminController@getadmin' );
 

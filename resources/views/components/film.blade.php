@@ -6,7 +6,7 @@
     <div class="col s9 m9">
       <div class="card film-card">
         <div class="card-image">
-          <img src="{{url('/images/thor.jpg')}}">
+          <img src="{{url('/posters/'.$film->title.'/'.$film->poster)}}">
           
         </div>
         <div class="card-content">

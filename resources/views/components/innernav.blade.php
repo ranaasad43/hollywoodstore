@@ -10,7 +10,8 @@
 				<li >
 					<input type="text" id="search_value" class="browser-default">
 					<a id="submit_search" class="btn">Search</a>
-				</li>		        
+				</li>
+				<li><a href="{{url('/adminpage')}}" class="btn">Admin</a></li>		        
 			  </ul>       
 			  @if(empty(session()->get('userData')))			       
 				  <ul id="nav-mobile" class="right hide-on-med-and-down">
@@ -21,7 +22,8 @@
 					<ul id="nav-mobile" class="right hide-on-med-and-down">     	
 					  <li><a href="{{route('delsession')}}" class="btn">Logout</a></li>
 					</ul>
-				@endif   
+				@endif
+				   
 		</div>
 		</nav>
 	</div>

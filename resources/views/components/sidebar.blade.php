@@ -35,6 +35,7 @@
 	    @else
 				<li>Genre Not Found</li>
 			@endif      
-		</ul>	
+		</ul>
+			
 	</div>
 </div>

@@ -1,8 +1,25 @@
 <div class="col m3 genere-col">				
 	<div class="heading">
-		<h5 class="z-depth-2 ">Control</h5>	
+		<h5 class="z-depth-2 ">
+      @if(!empty(session()->get('admin')))
+        {{session()->get('admin')['name']}}
+      @endif
+    </h5>	
 	</div>							
-	<ul class="collection genere-list z-depth-2">   
+	@if(!empty(session()->get('admin')))
+    <ul class="collection genere-list z-depth-2">       
+      
+      <li class="collection-item">
+        <div>
+          Logout
+          <a href="{{route('delsession')}}" class="secondary-content">
+            <i class="material-icons">logout</i>
+          </a>
+        </div>
+      </li>
+    </ul>
+  @endif
+  <ul class="collection genere-list z-depth-2">   
       <li class="collection-item">
       	<div>
       		Add Film
@@ -11,5 +28,6 @@
       		</a>      		
       	</div>
       </li>       
-	</ul>	
+	</ul>
+
 </div>

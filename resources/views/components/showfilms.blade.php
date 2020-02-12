@@ -11,13 +11,14 @@
 					<div class="movie-title">{{$film->title}}</div>
 					<div class="movie-year">{{$film->year}}</div>
 					<div class="movie-price">20$</div>
-					<a href="{{url('/film/'.$film->id)}}" id="add_to_cart" class="btn" >Read More</a>
-					<a href="{{url('/addToCart/'.$film->id)}}" id="add_to_cart" class="btn" data-product="{{$film->id}}">Add To Cart</a>
-
+					<a href="{{url('/film/'.$film->id)}}" id="add_to_cart" class="btn yellow" >Read More</a>
+					<a href="{{url('/addToCart/'.$film->id)}}" id="add_to_cart" class="btn  green accent-4" data-product="{{$film->id}}">Add To Cart</a>
+					<a href="{{url('/editfilm/'.$film->id)}}" id="add_to_cart" class="btn blue darken-3
+" >Update</a>
 					<form action="{{route('delfilm',$film->id)}}" method="post">
 						@csrf
 						@method('DELETE')				    
-						<button type="submit" class="btn" >Delete</button>  
+						<button type="submit" class="btn red darken-2" >Delete</button>  
 					</form>
 					
 				</li>

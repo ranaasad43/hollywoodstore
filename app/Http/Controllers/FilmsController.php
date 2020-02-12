@@ -66,6 +66,7 @@ class FilmsController extends ViewsComposingController
         $params['studio'] = $req->get('studio');
         $params['plot'] = $req->get('plot');
         $params['poster'] = $postername;
+        $params['featured'] = $req->get('featured');
         // $params['file'] = $file;
         // $params['filename'] = $filename;
         // $params['filetype'] = $fileMime;
@@ -89,7 +90,7 @@ class FilmsController extends ViewsComposingController
         }else{
             $data = $this->viewData;
             //dd($data);
-          return $this->buildTemplate('home');
+          return $this->buildTemplate('admin');
         }
     }
 
@@ -136,5 +137,31 @@ class FilmsController extends ViewsComposingController
         $results = $api->getApiData('DELETE','delfilm/'.$id,[]);
         //dd($results);
         return redirect()->back();    
+    }
+
+    public function edit($id,ApiCaller $api){
+    	$results = $api->getApiData('GET','film/'.$id,[]);
+    	//dd($results);
+    	$this->viewData['film'] = $results->data;
+    	return $this->buildTemplate('editfilm');
+    }
+
+    public function update(Request $req,ApiCaller $api,$id){
+    	//dd($req->all());
+    	$params['title'] = $req->get('title');
+      $params['year'] = $req->get('year');
+      $params['genre'] = $req->get('genre');
+      $params['studio'] = $req->get('studio');
+      $params['plot'] = $req->get('plot');
+      $params['featured'] = $req->get('featured');
+      $params['poster'] = $req->get('poster');
+      //dd($params);
+      //$params['poster'] = $postername;
+    	$results = $api->getApiData('POST','updatefilm/'.$id,$params);
+        //dd($results);
+      $this->viewData['status'] = !empty($results->status) ? $results->status : '';
+      $this->viewData['message'] = !empty($results->message) ? $results->message : '';
+
+        return redirect('/admin-panel');
     }
 }
