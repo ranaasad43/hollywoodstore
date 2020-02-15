@@ -13,7 +13,10 @@
 	</div>
 	<div class="container form-container">
 		{!! Form::open(['url' => '/getadmin','method' => 'post' ]) !!}
-    
+    <div class="input-field ">
+        {{ Form::label('Name:', null) }}
+        {{ Form::text('name', request()->get('name')) }}
+    </div>
     <div class="input-field ">
         {{ Form::label('email:', null) }}
         {{ Form::email('email', request()->get('email')) }}

@@ -10,8 +10,9 @@ class AdminController extends ViewsComposingController
 		
 
     public function getadmin(Request $req){
-    	//dd($req->email);
+    	//dd($req->name);
     	$rules = [
+        'name' =>  'required',
         'email' =>'email',
         'password' => 'required'
       ];
@@ -25,6 +26,7 @@ class AdminController extends ViewsComposingController
         return $this->buildTemplate('adminlogin');
     	}
 
+      $name = $req->name;
     	$admin = 'admin@admin.com';
     	$pass = 'admin';
 
@@ -35,7 +37,7 @@ class AdminController extends ViewsComposingController
         return $this->buildTemplate('adminlogin');
   	 }else{
   	 	//dd('data matched');
-  	 	$data['name'] = 'Mr.Admin';
+  	 	$data['name'] = $name;
   	 	session(['admin' => $data]);
   	 	//dd(session()->get('admin'));
       return redirect('/adminpage');
