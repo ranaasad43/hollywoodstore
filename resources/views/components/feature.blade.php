@@ -1,13 +1,18 @@
+
 <div class="col m9">				
 	<div class="heading">
 		<h5 class="z-depth-2 ">Feature Movies</h5>	
-	</div>
+</div>
 
 	<ul class="feature-movies">
 		@if(!empty($films))
 			@foreach($films as $film)
 				<li class="z-depth-3">
-					<img src="{{url('/posters/'.$film->title.'/'.$film->poster)}}" alt="movie">
+					<?php 
+						$title = str_replace(' ', '',$film->title);
+					  $title = str_replace(':', '',$title);
+					?>
+					<img src="{{url('/posters/'.$title.'/'.$film->poster)}}" alt="movie">
 					<div class="movie-title">{{$film->title}}</div>
 					<div class="movie-year">{{$film->year}}</div>
 					<div class="movie-price">20$</div>

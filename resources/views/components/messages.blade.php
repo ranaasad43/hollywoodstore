@@ -1,3 +1,4 @@
+
 <div class="heading">	
 	<p class="message-box {{!empty($message_class) ? $message_class : ''}}">
 	  {{!empty($message) ? $message : ''}}

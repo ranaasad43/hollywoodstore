@@ -47,14 +47,17 @@ class FilmsController extends ViewsComposingController
          //$file = $req->poster->path();
          
          //$fileMime = $req->poster->getClientMimeType();
-         if(!is_dir(public_path('/posters'))){
+        $posterdir = str_replace(' ', '',$req->get('title') );
+        $posterdir = str_replace(':', '',$posterdir);
+        //dd($posterdir);
+                if(!is_dir(public_path('/posters'))){
     				mkdir(public_path('/posters'));
     			}
-    			if(!is_dir(public_path('/posters/'.$req->get('title')))){
-    				mkdir(public_path('/posters/'.$req->get('title')));
+    			if(!is_dir(public_path('/posters/'.$posterdir))){
+    				mkdir(public_path('/posters/'.$posterdir));
     			}  			
     			$postername = $req->year.$req->genre.$req->studio.".".$req->file('poster')->getClientOriginalExtension();
-    			$directory = public_path('/posters/'.$req->get('title'));
+    			$directory = public_path('/posters/'.$posterdir);
     			$poster = $req->file('poster');
          	
 
@@ -136,7 +139,10 @@ class FilmsController extends ViewsComposingController
     public function destroy($id,ApiCaller $api){
         $results = $api->getApiData('DELETE','delfilm/'.$id,[]);
         //dd($results);
-        return redirect()->back();    
+        $this->viewData['status'] = !empty($results->status) ? $results->status : '';
+        $this->viewData['message'] = !empty($results->message) ? $results->message : '';
+        $this->viewData['message_class'] = 'red';
+        return $this->buildTemplate('admin');    
     }
 
     public function edit($id,ApiCaller $api){
@@ -162,6 +168,9 @@ class FilmsController extends ViewsComposingController
       $this->viewData['status'] = !empty($results->status) ? $results->status : '';
       $this->viewData['message'] = !empty($results->message) ? $results->message : '';
 
-        return redirect('/adminpage');
+      if($results->status == 400){
+       return $this->buildTemplate('editfilm'); 
+      }
+        return redirect('/adminpage',$this->viewData);
     }
 }

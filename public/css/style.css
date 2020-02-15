@@ -19,6 +19,7 @@
 
 .feature-movies li img{
 	width: 100%;
+	height:250px;
 }
 .feature-movies li a,.feature-movies li button{
 	width: 100%;
