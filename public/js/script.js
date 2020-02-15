@@ -20,9 +20,14 @@ $('#submit_search').click(function(){
 			if(typeof result.status != 'undefined' && result.status == 200){
 				if(result.data.length > 0){
 					var html = "";
+					//console.log(result.data);
+					
 					$.each(result.data,function(key,value){
+						var title = value.title.replace(/\s/g, "");
+						title = title.replace(/:/g,"");
+						//console.log(title);
 						html += "<li class='z-depth-3'>";
-							html += "<img src='"+base_url+"/posters/"+value.title+'/'+value.poster+' '+"' >";
+							html += "<img src='"+base_url+"/posters/"+title+'/'+value.poster+' '+"' >";
 							html += "<div class='movie-title'>"+value.title+"</div>";
 							html += "<div class='movie-year'>"+value.year+"</div>";
 							html += "<div class='movie-price'>"+"20$"+"</div>";
