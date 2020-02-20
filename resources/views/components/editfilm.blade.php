@@ -73,8 +73,17 @@
           </select>          
         </div>
       </div>      
-      <div class="file-field input-field">        
+      {{-- <div class="file-field input-field">        
         <input type="hidden" name="poster" value="{{$film->poster}}">            
+      </div> --}}
+      <div class="file-field input-field">
+      <div class="btn">
+        <span>Poster</span>
+        <input type="file" name="poster">
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text">
+      </div>
     </div>
     <div class="row">
         <div class="col s12">          

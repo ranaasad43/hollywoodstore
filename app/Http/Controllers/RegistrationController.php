@@ -15,16 +15,16 @@ class RegistrationController extends ViewsComposingController
     }
 
     public function adduser(Request $req,ApiCaller $api){
-    	
+    	//dd($req->all());
     	$rules = [
-    		// 'name' =>'min:3',
-    		// 'user_name' => 'min:5',
-    		// 'email' => 'email',
-    		// 'password' => 'required',
-    		// 'retype-password' => 'required|same:password',
-    		// 'dob' => 'date',
-    		// 'country' => 'required',
-    		// 'image' => 'mimes:png,png'
+    		 'name' =>'min:3',
+    		 'user_name' => 'min:5',
+    		 'email' => 'email',
+    		 'password' => 'required',
+    		 'retype-password' => 'required|same:password',
+    		 'dob' => 'date',
+    		 'country' => 'required',
+    		 'image' => 'required|mimes:jpg,jpeg,png'
 
     	];
 
@@ -33,7 +33,7 @@ class RegistrationController extends ViewsComposingController
     	];
 
     	$validator = Validator::make($req->all(),$rules,$msgs);
-
+      //dd($validator->messages()->all());
         if(!empty($validator->messages()->all())){
             $this->viewData['errors'] = $validator->messages()->all();
             return $this->buildTemplate('register');
@@ -47,16 +47,16 @@ class RegistrationController extends ViewsComposingController
     		mkdir(public_path('/users/'.$req->get('user_name')));
     	}   	
 
-    	$image = Image::make($req->file('image'));
-    	$wm = Image::make(public_path('/images/film.png'))->resize(50,50);
+    	// $image = Image::make($req->file('image'));
+    	// $wm = Image::make(public_path('/images/film.png'))->resize(50,50);
 
-    	$image->insert($wm, 'bottom-left');
+    	// $image->insert($wm, 'bottom-left');
 
-    	$directory = public_path('/users/'.$req->get('user_name'));
+    	// $directory = public_path('/users/'.$req->get('user_name'));
 
     	$image_name = $req->get('user_name').'.'.$req->file('image')->getClientOriginalExtension();
 
-    	$image->save($directory.'/'.$image_name);
+    	// $image->save($directory.'/'.$image_name);
 
         $params = array();
 
@@ -81,9 +81,9 @@ class RegistrationController extends ViewsComposingController
         //dd($this->viewData);
         if($response->status == 400){
           return $this->buildTemplate('register');  
-        }else{
-          return redirect('/',$this->viewData);
-        }    
+        }
+
+        return $this->buildTemplate('home');         
 
     }
 

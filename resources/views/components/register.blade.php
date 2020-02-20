@@ -1,14 +1,7 @@
 <div class="col m12">
 	<div class="heading">
 		<h5 class="z-depth-2">Registration</h5>
-    <p class="message-box {{!empty($message_class) ? $message_class : ''}}">
-      {{!empty($message) ? $message : ''}}
-    </p>
-    <ul>
-      @foreach($errors as $error)
-        <li class="red-text center-align">{{$error}}</li>
-      @endforeach
-    </ul>	
+    
 	</div>
 	<div class="container form-container">
 		{!! Form::open(['url' => '/register' ,'method' => 'post', 'files' => true]) !!}

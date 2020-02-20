@@ -26,6 +26,7 @@ $('#submit_search').click(function(){
 						var title = value.title.replace(/\s/g, "");
 						title = title.replace(/:/g,"");
 						//console.log(title);
+						//html += "<ul class='movies-ul'>";
 						html += "<li class='z-depth-3'>";
 							html += "<img src='"+base_url+"/posters/"+title+'/'+value.poster+' '+"' >";
 							html += "<div class='movie-title'>"+value.title+"</div>";
@@ -33,6 +34,7 @@ $('#submit_search').click(function(){
 							html += "<div class='movie-price'>"+"20$"+"</div>";
 							html += "<a href='"+base_url+"/addToCart/"+value.id+"' id='add_to_cart' class='btn'>Add To Cart</a>"; 	
 						html += "</li>";
+						//html += "</ul>";
 					});
 					$('.feature-movies').html(html);					
 				}else{

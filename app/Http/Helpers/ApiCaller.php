@@ -62,7 +62,7 @@
 					}
 					//dd('get api');
 					$endPointUrl = rtrim($endUrl,'&');
-					//dd($endPointUrl);
+					// dd($endPointUrl);
 					$options = array(
 						CURLOPT_URL => env('API_URL').$endPointUrl,
 						CURLOPT_RETURNTRANSFER => !empty(env('API_DEBUG')) ? false : true 

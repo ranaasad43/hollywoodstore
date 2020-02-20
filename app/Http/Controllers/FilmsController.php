@@ -22,15 +22,12 @@ class FilmsController extends ViewsComposingController
         //dd($_FILES['poster']['type']);
         //dd($req->file('poster'))->mimeType();
     	$rules = [
-    		// 'name' =>'min:3',
-    		// 'user_name' => 'min:5',
-    		// 'email' => 'email',
-    		// 'password' => 'required',
-    		// 'retype-password' => 'required|same:password',
-    		// 'dob' => 'date',
-    		// 'country' => 'required',
-    		// 'image' => 'mimes:png,png'
-
+    		 'title' =>'min:3',
+    		 'year' => 'min:4',
+         'genre' => 'required',
+         'studio' => 'required',
+         'plot' => 'required',
+    		 'poster' => 'mimes:jpeg,jpg,png',
     	];
 
     	$msgs = [
@@ -50,7 +47,7 @@ class FilmsController extends ViewsComposingController
         $posterdir = str_replace(' ', '',$req->get('title') );
         $posterdir = str_replace(':', '',$posterdir);
         //dd($posterdir);
-                if(!is_dir(public_path('/posters'))){
+          if(!is_dir(public_path('/posters'))){
     				mkdir(public_path('/posters'));
     			}
     			if(!is_dir(public_path('/posters/'.$posterdir))){
@@ -154,23 +151,74 @@ class FilmsController extends ViewsComposingController
 
     public function update(Request $req,ApiCaller $api,$id){
     	//dd($req->all());
+      $rules = [
+         'title' =>'min:3',
+         'year' => 'min:4',
+         'genre' => 'required',
+         'studio' => 'required',
+         'plot' => 'required',
+         'poster' => 'required|mimes:jpeg,jpg,png',
+      ];
+
+      $msgs = [
+        'name.min' => 'title should be minum 3 letters'
+      ];
+
+      $validator = Validator::make($req->all(),$rules,$msgs);
+
+        if(!empty($validator->messages()->all())){
+          //dd($validator->messages()->all());
+          $this->viewData['errors'] = $validator->messages()->all();
+          return $this->buildTemplate('editfilm');
+        }
+
+      $posterdir = str_replace(' ', '',$req->get('title') );
+      $posterdir = str_replace(':', '',$posterdir);
+      
+      if(!is_dir(public_path('/posters/'.$posterdir))){
+        mkdir(public_path('/posters/'.$posterdir));
+      }       
+      $postername = $req->year.$req->genre.$req->studio.".".$req->file('poster')->getClientOriginalExtension();
+      $directory = public_path('/posters/'.$posterdir);
+      $poster = $req->file('poster');
+
+      //dd($postername." :" .$posterdir);  
+      
     	$params['title'] = $req->get('title');
       $params['year'] = $req->get('year');
       $params['genre'] = $req->get('genre');
       $params['studio'] = $req->get('studio');
       $params['plot'] = $req->get('plot');
       $params['featured'] = $req->get('featured');
-      $params['poster'] = $req->get('poster');
-      //dd($params);
-      //$params['poster'] = $postername;
-    	$results = $api->getApiData('POST','updatefilm/'.$id,$params);
-        //dd($results);
-      $this->viewData['status'] = !empty($results->status) ? $results->status : '';
-      $this->viewData['message'] = !empty($results->message) ? $results->message : '';
+      $params['poster'] = $postername;
+      
+      $posterdir = str_replace(' ', '',$req->get('title') );
+      $posterdir = str_replace(':', '',$posterdir);
+      
+      if(!is_dir(public_path('/posters/'.$posterdir))){
+        mkdir(public_path('/posters/'.$posterdir));
+      }       
+      $postername = $req->year.$req->genre.$req->studio.".".$req->file('poster')->getClientOriginalExtension();
+      $directory = public_path('/posters/'.$posterdir);
+      $poster = $req->file('poster');
 
-      if($results->status == 400){
-       return $this->buildTemplate('editfilm'); 
+      //dd($params);
+      
+    	$response = $api->getApiData('POST','updatefilm/'.$id,$params);
+      //dd($results);
+      
+
+      if(!empty($response)){
+        $this->viewData['status'] = !empty($response->status) ? $response->status : '';
+        $this->viewData['message'] = !empty($response->message) ? $response->message : '';
+        if($response->status == 200){         
+          $poster->move($directory,$postername);          
+        }
+
+        if($response->status == 400){
+          return $this->buildTemplate('editfilm'); 
+        } 
       }
-        return redirect('/adminpage',$this->viewData);
+        return $this->buildTemplate('admin');    
     }
 }

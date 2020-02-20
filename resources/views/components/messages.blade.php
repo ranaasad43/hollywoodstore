@@ -4,8 +4,10 @@
 	  {{!empty($message) ? $message : ''}}
 	</p>
 	<ul>
-	  @foreach($errors as $error)
-		<li class="red-text center-align">{{$error}}</li>
-	  @endforeach
+		@if(!empty($errors))
+		  @foreach($errors as $error)
+			<li class="red-text center-align">{{$error}}</li>
+		  @endforeach
+		@endif  
 	</ul>	
 </div>
