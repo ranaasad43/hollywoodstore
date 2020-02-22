@@ -5,7 +5,7 @@
 		'headerCss' => ['googlecss','style'],
 		'headSection' =>['head'],
 		'headerSection' => ['navbar','messages'],
-		'mainSection' =>['adminsidebar','editfilm'],
+		'mainSection' =>['innernav','adminsidebar','editfilm'],
 		'footerSection' => ['footer'],
 		'footerJs' => ['jquery','googlejs','script']
 	];
